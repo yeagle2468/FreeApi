@@ -1,0 +1,90 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion COMPILE_SDK_VERSION as int
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdkVersion MIN_SDK_VERSION as int
+        targetSdkVersion TARGET_SDK_VERSION as int
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    api "com.android.support:appcompat-v7:${ANDROID_SUPPORT_VERSION}"
+    api "com.android.support:design:${ANDROID_SUPPORT_VERSION}"
+    api "com.android.support.constraint:constraint-layout:${CONSTRAINT_LAYOUT_VERSION}"
+
+    //glide
+    api "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
+    annotationProcessor "com.github.bumptech.glide:compiler:${GLIDE_VERSION}"
+    api "com.github.bumptech.glide:okhttp3-integration:${GLIDE_VERSION}"
+
+    //retrofit(okhttp库已包含在retrofit中)
+    api "com.squareup.retrofit2:retrofit:${RETROFIT_VERSION}"
+    api "com.squareup.retrofit2:converter-gson:${RETROFIT_VERSION}"
+    api "com.squareup.retrofit2:adapter-rxjava2:${RETROFIT_VERSION}"
+
+    //butterknife
+    api "com.jakewharton:butterknife:${BUTTERKNIFE_VERSION}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTERKNIFE_VERSION}"
+
+    //dagger2
+    api "com.google.dagger:dagger:${DAGGER_VERSION}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
+//    api "com.google.dagger:dagger-android:${DAGGER_VERSION}"
+    api "com.google.dagger:dagger-android-support:${DAGGER_VERSION}"
+    annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER_VERSION}"
+
+    //gson
+    api "com.google.code.gson:gson:${GSON_VERSION}"
+
+    //RxJava
+    api "io.reactivex.rxjava2:rxjava:${RXJAVA_VERSION}"
+    api "io.reactivex.rxjava2:rxandroid:${RXANDROID_VERSION}"
+
+    //Rxlifecycle
+    api "com.trello.rxlifecycle2:rxlifecycle:${RX_LIFECYCLE_VERSION}"
+    api "com.trello.rxlifecycle2:rxlifecycle-components:${RX_LIFECYCLE_VERSION}"
+
+    //rxCache
+    api "com.github.VictorAlbertos.RxCache:runtime:${RXCACHE_VERSION}"
+    api "com.github.VictorAlbertos.Jolyglot:gson:${JOLYGLOT_GSON_VERSION}"
+
+    //leakcanary
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:${LEAK_CANARY_VERSION}"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${LEAK_CANARY_VERSION}"
+
+    // permission 使用非常简单 注解来的
+    api("com.github.hotchemi:permissionsdispatcher:${PERMISSION_DISPATCHER}") {
+        // if you don't use android.app.Fragment you can exclude support for them
+        exclude module: "support-v13"
+    }
+    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:${PERMISSION_DISPATCHER}"
+    api "org.greenrobot:eventbus:${EVENT_BUS_VERSION}"
+    api "com.zhy:base-rvadapter:${BASE_RV_ADAPTER_VERSION}"
+
+    api "me.jessyan:rxerrorhandler:${RX_ERROR_HANDLER_VERSION}"
+    api "com.github.markomilos:paginate:${PAGINATE_VERSION}"
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}

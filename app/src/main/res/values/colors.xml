@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 没人用紫色 我来用 -->
+    <!--<color name="colorPrimary">#9c27b0</color>-->
+    <!--<color name="colorPrimaryDark">#7d1f8d</color>-->
+    <color name="colorPrimary">@color/white</color>
+    <color name="colorPrimaryDark">@color/white</color>
+    <color name="colorAccent">#9c27b0</color>
+
+    <color name="main_color">#e6e6e6</color>
+    <color name="white">#fff</color>
+    <color name="main_black">#515151</color>
+
+    <color name="colorToolbarAction">@color/white</color>
+    <color name="colorToolbarTitle">@color/white</color>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="global_actionbar_height">48dp</dimen>
+
+    <dimen name="toolbar_action_height">16sp</dimen>
+    <dimen name="toolbar_title_size">18sp</dimen>
+    <dimen name="padding_min">4dp</dimen>
+
+    <dimen name="progressbar_size">30dp</dimen>
+</resources>

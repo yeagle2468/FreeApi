@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">library</string>
+    <string name="unknown_error">未知错误</string>
+    <string name="network_invalid_error">网络不可用</string>
+    <string name="time_out_error">网络超时</string>
+    <string name="parse_data_error">数据解析错误</string>
+
+    /**HTTP 请求返回的code， 下面的名字不允许混淆改动，否则出现解析不了情况**/
+    <string name="request_server_error_500">服务器错误</string>
+    <string name="request_server_error_404">请求地址不存在</string>
+    <string name="request_server_error_403">请求被服务器拒绝</string>
+    <string name="request_server_error_401">请求拒绝，未验证</string>
+    <string name="request_server_error_307">请求被重定向到其他页面</string>
+
+    <string name="lib_cancel">取消</string>
+</resources>

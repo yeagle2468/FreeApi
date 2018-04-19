@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">FreeApi</string>
+    <string name="title_back">返回</string>
+
+    <string name="home">首页</string>
+    <string name="weather">天气</string>
+    <string name="mine">我的</string>
+
+    <string name="content_is_empty">内容为空</string>
+</resources>

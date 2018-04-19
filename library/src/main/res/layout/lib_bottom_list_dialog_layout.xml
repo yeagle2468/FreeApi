@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+              android:orientation="vertical"
+              android:background="@android:color/transparent"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="bottom">
+    <ListView android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:dividerHeight="1px"
+        android:divider="#dfdfdf"
+        android:cacheColorHint="@android:color/transparent"
+        />
+
+    <TextView
+        android:id="@+id/cancel"
+        android:textColor="#989393"
+        android:layout_marginTop="5dp"
+        android:text="@string/lib_cancel"
+        style="@style/bottom_dialog_text"
+        android:background="@android:color/white"
+        />
+</LinearLayout>
