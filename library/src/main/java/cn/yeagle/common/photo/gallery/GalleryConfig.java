@@ -5,7 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * the {@link GalleryActivity} of buidler.
+ * the of buidler.
  */
 public class GalleryConfig implements Parcelable {
 
@@ -50,8 +50,7 @@ public class GalleryConfig implements Parcelable {
 
         /**
          * @param filterMimeTypes filter of media type， based on MimeType standards：
-         *            {http://www.w3school.com.cn/media/media_mimeref.asp}
-         *            <Li>eg:new string[]{"image/gif","image/jpeg"}
+         *
          */
         public Build filterMimeTypes(String[] filterMimeTypes) {
             this.filterMimeTypes = filterMimeTypes;

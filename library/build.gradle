@@ -1,4 +1,14 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+
+publish {
+    userOrg = 'yeagle7'//bintray.com用户名
+    groupId = 'com.yeagle'//jcenter上的路径
+    artifactId = 'library'//项目名称
+    publishVersion = '1.0.0'//版本号
+    desc = 'this is for test'//描述，不重要
+    website = 'https://github.com/yeagle2468/FreeApi'//网站，最好有，不重要
+}
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION as int
@@ -22,6 +32,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 }
 
@@ -87,4 +102,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}
+
+tasks.withType(Javadoc) {
+    options.encoding = "UTF-8"
 }
