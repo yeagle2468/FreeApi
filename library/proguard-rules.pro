@@ -130,6 +130,22 @@
 #butterknife
 -dontwarn butterknife.internal.**
 
+
+#rxlifecycle2
+-dontwarn com.trello.rxlifecycle2.**
+
+#dagger
+-dontwarn dagger.**
+
+#okhttp
+-dontwarn okhttp3.**
+
+#okio
+-dontwarn okio.**
+
+#retrofit
+-dontwarn retrofit2.**
+
 #Glide
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {

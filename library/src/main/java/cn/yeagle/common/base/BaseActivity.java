@@ -122,7 +122,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
             //试图进一步初始化
             initViews(bundle);
         }
-        StatusBarUtil.statusBarLightMode(this);
     }
 
     public boolean useInject() {

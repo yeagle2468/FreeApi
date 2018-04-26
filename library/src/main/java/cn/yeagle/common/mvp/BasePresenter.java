@@ -3,6 +3,8 @@ package cn.yeagle.common.mvp;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.android.ActivityEvent;
@@ -24,9 +26,9 @@ import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 public abstract class BasePresenter<V extends cn.yeagle.common.mvp.IView> implements IPresenter<V> { //<V extends IView>
     protected final String TAG = this.getClass().getSimpleName();
     protected V mView;
+    protected static Gson mGson = new Gson();
 
-    private static final RequestRetryHandler mRetryDefaultHander = new RequestRetryHandler(3, 200);
-
+    private static final RequestRetryHandler mRetryDefaultHandler = new RequestRetryHandler(3, 200);
 //    public BasePresenter(RxErrorHandler errorHandler) {
 //
 //    }
@@ -80,6 +82,10 @@ public abstract class BasePresenter<V extends cn.yeagle.common.mvp.IView> implem
         return bindToLifecycle();
     }
 
+    protected RequestRetryHandler getRetryDefaultHandler() {
+        return mRetryDefaultHandler;
+    }
+
     private LifecycleProvider convertViewToLifeCycle() {
         if (mView == null || !(mView instanceof LifecycleProvider)) {
             if (mView == null)
@@ -91,35 +97,57 @@ public abstract class BasePresenter<V extends cn.yeagle.common.mvp.IView> implem
         return (LifecycleProvider) mView;
     }
 
-    /**
-     * 请求不需要重新请求
-     * @param observable
-     * @param onFinally
-     * @param subscriber
-     */
-    protected void doRequestNoRetery(Observable observable, Action onFinally, ErrorHandleSubscriber subscriber) {
-        doRequest(observable, null, onFinally, subscriber);
+    protected void doRequest(Observable observable, ErrorHandleSubscriber subscriber) {
+        doRequest(observable, subscriber, null);
     }
 
-    protected void doRequest(Observable observable, Action onFinally, ErrorHandleSubscriber subscriber) {
-        doRequest(observable, mRetryDefaultHander, onFinally, subscriber);
+    protected void doRequest(Observable observable, ErrorHandleSubscriber subscriber, TypeToken token) {
+        doRequest(observable, null, subscriber, token);
+    }
+
+    protected void doRequest(Observable observable, Action onFinally, ErrorHandleSubscriber subscriber, TypeToken token) {
+        doRequest(observable, false, onFinally, subscriber, token);
     }
 
     /**
      * 抽出公共部分
      * 这个函数后面也要重写，把json转成Object的地方放在map里面转 很方便
      * @param observable 要操作的部分
-     * @param handler 做重试处理
+     * @param retry 是否做重试处理
      * @param onFinally 最好要做的操作
      * @param subscriber 出结果及异常处理
      */
-    protected void doRequest(Observable observable, RequestRetryHandler handler, Action onFinally, ErrorHandleSubscriber subscriber) {
-        observable.subscribeOn(Schedulers.io())
+    protected void doRequest(Observable observable, boolean retry, Action onFinally, ErrorHandleSubscriber subscriber, final TypeToken token) {
+//        observable.subscribeOn(Schedulers.io())
+//                .retryWhen(handler)
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .doFinally(onFinally)
+//                .compose(getLifecycleTransformer())//使用 Rxlifecycle,使 Disposable 和 Activity 一起销毁 //<List<UserInfo>>
+//                .subscribe(subscriber);
+        RequestRetryHandler handler = retry ? getRetryDefaultHandler() : null; // 不做处理就为null
+        observable.map(object -> {
+            if (token != null) {
+                return object;
+            } else {
+                return parseBean(object.toString(), token);
+            }
+        }).subscribeOn(Schedulers.io())
                 .retryWhen(handler)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally(onFinally)
                 .compose(getLifecycleTransformer())//使用 Rxlifecycle,使 Disposable 和 Activity 一起销毁 //<List<UserInfo>>
                 .subscribe(subscriber);
+    }
+
+
+    protected <T> Object parseBean(String string, TypeToken<T> token) {
+        try {
+//            LogUtils.e(TAG, "parse:" + string + ",thread: " + Thread.currentThread().getName());
+            return mGson.fromJson(string, token.getType());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override

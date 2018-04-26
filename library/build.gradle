@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'
 
 publish {
-    userOrg = 'yeagle7'//bintray.com用户名
+    userOrg = 'yeagle'//bintray.com用户名
     groupId = 'com.yeagle'//jcenter上的路径
     artifactId = 'library'//项目名称
     publishVersion = '1.0.0'//版本号

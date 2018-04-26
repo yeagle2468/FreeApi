@@ -1,4 +1,4 @@
-package cn.yeagle.common.http;
+package com.yeagle.freeapi.network;
 
 
 import android.annotation.SuppressLint;
@@ -26,7 +26,6 @@ import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
 import cn.yeagle.common.BuildConfig;
-import cn.yeagle.common.base.BaseApp;
 import okhttp3.OkHttpClient;
 
 /**
@@ -76,12 +75,7 @@ public class CustomOkHttpClient {
                 mBuilder.sslSocketFactory(sslSocketFactory);
             }
             //host验证,这里host不验证
-            mBuilder.hostnameVerifier(new HostnameVerifier() {
-                @Override
-                public boolean verify(String hostname, SSLSession session) {
-                    return true;
-                }
-            });
+            mBuilder.hostnameVerifier((hostname, session) -> {return true;});
             OkHttpClient build = mBuilder.build();
             return build;
         } catch (Exception e) {

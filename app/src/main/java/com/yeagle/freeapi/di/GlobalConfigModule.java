@@ -12,7 +12,7 @@ import java.io.File;
 
 import javax.inject.Singleton;
 
-import cn.yeagle.common.http.CustomOkHttpClient;
+import com.yeagle.freeapi.network.CustomOkHttpClient;
 import cn.yeagle.common.http.IRepositoryManager;
 import cn.yeagle.common.http.RepositoryManager;
 import cn.yeagle.common.utils.CacheDirUtils;
