@@ -5,7 +5,7 @@ package com.yeagle.freeapi.network.base;
  */
 public class BaseBean<T>  { //Serializable比较方便 implements Parcelable，Parcelable更加有利于有优势
 
-    protected static final int SUCCESS_CODE = 1000;
+    protected static final int SUCCESS_CODE = 200;
 
     private int    code;
     private String msg;

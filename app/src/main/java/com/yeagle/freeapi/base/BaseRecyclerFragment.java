@@ -2,6 +2,7 @@ package com.yeagle.freeapi.base;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.paginate.Paginate;
 import com.yeagle.freeapi.R;
@@ -21,6 +22,8 @@ public class BaseRecyclerFragment extends LazyFragment implements Paginate.Callb
     protected Paginate mPaginate;
     protected boolean mLoading;
 
+    protected View mLoadingView;
+
     @Override
     public int getLayoutId() {
         return R.layout.layout_recycler_refresh;
@@ -30,6 +33,7 @@ public class BaseRecyclerFragment extends LazyFragment implements Paginate.Callb
     protected void initViews() {
         mRcView = mRootView.findViewById(R.id.recyclerView);
         mSwipeLayout = mRootView.findViewById(R.id.swipeLayout);
+        mLoadingView = mRootView.findViewById(R.id.loadingView);
 
         if (mSwipeLayout != null) {
             mSwipeLayout.setOnRefreshListener(() -> onRefresh());

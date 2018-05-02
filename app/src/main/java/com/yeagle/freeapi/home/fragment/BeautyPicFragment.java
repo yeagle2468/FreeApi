@@ -1,10 +1,16 @@
 package com.yeagle.freeapi.home.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import com.google.gson.reflect.TypeToken;
 import com.yeagle.freeapi.api.Api;
 import com.yeagle.freeapi.base.ApiRecyclerFragment;
+import com.yeagle.freeapi.base.BasePagePresenter;
 import com.yeagle.freeapi.home.adapter.BeautyPicAdapter;
 import com.yeagle.freeapi.home.model.BeautyInfo;
 
@@ -24,10 +30,20 @@ public class BeautyPicFragment extends ApiRecyclerFragment {
     private BeautyPicAdapter mAdapter;
 
     @Inject
+    BasePagePresenter mPagePresenter;
+
+    @Inject
     public BeautyPicFragment() {
         Bundle bundle = new Bundle();
         bundle.putString(PATH, Api.BEAUTY_PATH);
         setArguments(bundle);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        mPagePresenter.takeView(this);
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
@@ -50,7 +66,33 @@ public class BeautyPicFragment extends ApiRecyclerFragment {
     }
 
     @Override
+    protected BasePagePresenter getBasePagePresenter() {
+        return mPagePresenter;
+    }
+
+    @Override
+    public void showLoading() {
+        mLoadingView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        mLoadingView.setVisibility(View.GONE);
+    }
+
+    @Override
     public boolean useInject() {
-        return false;
+        return true;
+    }
+
+    @Override
+    protected TypeToken getTypeToken() {
+        return new TypeToken<List<BeautyInfo>>(){};
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mPagePresenter.dropView();
     }
 }

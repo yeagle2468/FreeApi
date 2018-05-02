@@ -1,10 +1,15 @@
 package com.yeagle.freeapi.base;
 
+import com.google.gson.JsonElement;
+import com.google.gson.reflect.TypeToken;
+import com.yeagle.freeapi.network.base.BaseBean;
+
 import java.util.HashMap;
 
 import cn.yeagle.common.http.IRepositoryManager;
 import cn.yeagle.common.mvp.BasePresenter;
 import cn.yeagle.common.mvp.IView;
+import cn.yeagle.common.utils.LogUtils;
 import io.reactivex.Observable;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
@@ -12,7 +17,7 @@ import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 /**
  * Created by yeagle on 2018/4/26.
  */
-public abstract class BasePagePresenter<V extends IView> extends BasePresenter<V> implements IPagePresenter<V> {
+public abstract class BasePagePresenter extends BasePresenter<PageContract.View> implements PageContract.Presenter<PageContract.View>{
 //    private int page;
     protected RxErrorHandler mErrorHandler;
     protected IRepositoryManager mRepositoryManager;
@@ -25,14 +30,13 @@ public abstract class BasePagePresenter<V extends IView> extends BasePresenter<V
     }
 
     @Override
-    public void loadData(String path, boolean refresh, ErrorHandleSubscriber subscriber) {
-        loadData(path, refresh, null);
-//        mRepositoryManager.obtainRetrofitService(FreeApiService.class).request(path, );
+    public void loadData(String path, boolean refresh, TypeToken token) {
+        loadData(path, refresh, null, token);
     }
 
 
     @Override
-    public void loadData(String path, boolean refresh, Object extraValue, ErrorHandleSubscriber subscriber) {
+    public void loadData(final String path, final boolean refresh, Object extraValue, TypeToken token) {
         final int page;
         synchronized (mPages) {
             if (refresh || !mPages.containsKey(path)) {
@@ -44,11 +48,30 @@ public abstract class BasePagePresenter<V extends IView> extends BasePresenter<V
         }
 
         Observable observable = getObservable(path, page, extraValue);
-        doRequest(observable, subscriber);
+        doRequest(observable, new ErrorHandleSubscriber(mErrorHandler) {
+            @Override
+            public void onNext(Object o) {
+                if (mView != null)
+                    mView.onData(o, refresh, path);
+            }
+
+            @Override
+            public void onComplete() {
+                if (mView != null)
+                    mView.onComplete(path);
+            }
+        }, token);
     }
 
     public RxErrorHandler getRxErrorHandler() {
         return mErrorHandler;
+    }
+
+    @Override
+    protected String convertToString(Object object) {
+        String str = ((BaseBean<JsonElement>)object).getData().toString();
+        LogUtils.e(TAG, "content;" + str);
+        return str;
     }
 
     public int getPage(String path) {

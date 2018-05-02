@@ -2,6 +2,7 @@ package com.yeagle.freeapi.main.module;
 
 import com.yeagle.freeapi.base.ApiPagePresenter;
 import com.yeagle.freeapi.base.BasePagePresenter;
+import com.yeagle.freeapi.home.fragment.BeautyPicFragment;
 import com.yeagle.freeapi.home.fragment.HomeFragment;
 
 import cn.yeagle.common.di.scope.ActivityScoped;
@@ -19,7 +20,11 @@ public abstract class MainModule {
     @ContributesAndroidInjector
     abstract HomeFragment homeFragment();
 
-//    @ActivityScoped
-//    @Binds
-//    abstract BasePagePresenter mainPresenter(ApiPagePresenter presenter);
+    @ActivityScoped
+    @Binds
+    abstract BasePagePresenter mainPresenter(ApiPagePresenter presenter);
+
+    @FragmentScoped
+    @ContributesAndroidInjector
+    abstract BeautyPicFragment beautyPicFragment();
 }

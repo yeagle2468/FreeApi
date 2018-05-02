@@ -126,17 +126,25 @@ public abstract class BasePresenter<V extends cn.yeagle.common.mvp.IView> implem
 //                .subscribe(subscriber);
         RequestRetryHandler handler = retry ? getRetryDefaultHandler() : null; // 不做处理就为null
         observable.map(object -> {
-            if (token != null) {
+            if (token == null) {
                 return object;
             } else {
-                return parseBean(object.toString(), token);
+                return parseBean(convertToString(object), token);
             }
         }).subscribeOn(Schedulers.io())
-                .retryWhen(handler)
                 .observeOn(AndroidSchedulers.mainThread())
-                .doFinally(onFinally)
                 .compose(getLifecycleTransformer())//使用 Rxlifecycle,使 Disposable 和 Activity 一起销毁 //<List<UserInfo>>
                 .subscribe(subscriber);
+
+        if (handler != null)
+            observable.retryWhen(handler);
+
+        if (onFinally != null)
+            observable.doFinally(onFinally);
+    }
+
+    protected String convertToString(Object object) {
+        return object.toString();
     }
 
 

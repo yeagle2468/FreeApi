@@ -1,5 +1,6 @@
 package com.yeagle.freeapi.api;
 
+import com.google.gson.JsonElement;
 import com.yeagle.freeapi.home.model.SatinGodInfo;
 import com.yeagle.freeapi.home.model.SatinInfo;
 import com.yeagle.freeapi.network.base.BaseBean;
@@ -23,5 +24,5 @@ public interface FreeApiService { //satinGodApi
 
     //BaseBean<List<SatinGodInfo>>
     @GET("{path}")
-    Observable<BaseBean> request(@Path(value = "path", encoded = true)String path, @Query("type") int type, @Query("page") int page);
+    Observable<BaseBean<JsonElement>> request(@Path(value = "path", encoded = true)String path, @Query("type") int type, @Query("page") int page);
 }
