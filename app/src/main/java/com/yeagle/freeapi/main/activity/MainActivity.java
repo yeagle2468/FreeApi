@@ -7,6 +7,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.yeagle.freeapi.R;
 import com.yeagle.freeapi.base.FreeApiActivity;
+import com.yeagle.freeapi.home.fragment.HomeFragment;
 
 import butterknife.BindView;
 
@@ -33,6 +34,8 @@ public class MainActivity extends FreeApiActivity {
                 .setActiveColorResource(R.color.colorAccent)).setInActiveColor(R.color.main_black)
                 .setFirstSelectedPosition(0)
                 .initialise();
+
+        replaceFragment(new HomeFragment(), R.id.content_frame);
     }
 
     @Override

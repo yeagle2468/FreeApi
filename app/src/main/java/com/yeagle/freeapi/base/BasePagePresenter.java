@@ -14,8 +14,8 @@ import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
  */
 public abstract class BasePagePresenter<V extends IView> extends BasePresenter<V> implements IPagePresenter<V> {
 //    private int page;
-    private RxErrorHandler mErrorHandler;
-    private IRepositoryManager mRepositoryManager;
+    protected RxErrorHandler mErrorHandler;
+    protected IRepositoryManager mRepositoryManager;
 
     private HashMap<String, Integer> mPages = new HashMap<>();
 
@@ -45,6 +45,17 @@ public abstract class BasePagePresenter<V extends IView> extends BasePresenter<V
 
         Observable observable = getObservable(path, page, extraValue);
         doRequest(observable, subscriber);
+    }
+
+    public RxErrorHandler getRxErrorHandler() {
+        return mErrorHandler;
+    }
+
+    public int getPage(String path) {
+        if (mPages.containsKey(path))
+            mPages.get(path);
+
+        return 0;
     }
 
     protected abstract Observable getObservable(String path, int page, Object extraValue);

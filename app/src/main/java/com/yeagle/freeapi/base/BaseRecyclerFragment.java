@@ -7,12 +7,14 @@ import com.paginate.Paginate;
 import com.yeagle.freeapi.R;
 import com.yeagle.freeapi.widget.recycleview.CustomLoadingListItemCreator;
 
+import javax.inject.Inject;
+
 import cn.yeagle.common.base.BaseFragment;
 
 /**
  * Created by yeagle on 2018/4/18.
  */
-public class BaseRecyclerFragment extends BaseFragment implements Paginate.Callbacks {
+public class BaseRecyclerFragment extends LazyFragment implements Paginate.Callbacks {
     private static final int GRID_SPAN = 3;
     protected RecyclerView mRcView;
     protected SwipeRefreshLayout mSwipeLayout;
@@ -33,12 +35,22 @@ public class BaseRecyclerFragment extends BaseFragment implements Paginate.Callb
             mSwipeLayout.setOnRefreshListener(() -> onRefresh());
         }
 
+        initAdapter();
         mPaginate = Paginate.with(mRcView, this)
                 .setLoadingTriggerThreshold(2)
                 .addLoadingListItem(true)
                 .setLoadingListItemCreator(new CustomLoadingListItemCreator())
                 .setLoadingListItemSpanSizeLookup(() -> GRID_SPAN)
                 .build();
+    }
+
+    protected void initAdapter() {
+
+    }
+
+    @Override
+    protected void lazyLoad() {
+        onRefresh();
     }
 
     protected void onRefresh() {

@@ -208,3 +208,4 @@
 -keepattributes *Annotation*
 -keep class sun.misc.Unsafe { *; }
 
+-keep com.yeagle.freeapi.home.model.** { *; }

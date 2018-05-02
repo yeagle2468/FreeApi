@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.yeagle.freeapi.api.Api;
+import com.yeagle.freeapi.base.ApiPagePresenter;
+import com.yeagle.freeapi.base.BasePagePresenter;
 import com.yeagle.freeapi.network.ResponseError;
 import com.yeagle.freeapi.network.converter.MyGsonConverterFactory;
 import com.yeagle.freeapi.util.OkHttpUtils;
@@ -13,6 +15,8 @@ import java.io.File;
 import javax.inject.Singleton;
 
 import com.yeagle.freeapi.network.CustomOkHttpClient;
+
+import cn.yeagle.common.di.scope.ActivityScoped;
 import cn.yeagle.common.http.IRepositoryManager;
 import cn.yeagle.common.http.RepositoryManager;
 import cn.yeagle.common.utils.CacheDirUtils;
@@ -95,4 +99,6 @@ public abstract class GlobalConfigModule {
                 .addConverterFactory(MyGsonConverterFactory.create(gson));//使用 Gson GsonConverterFactory.create(gson)
         return builder.build();
     }
+
+
 }

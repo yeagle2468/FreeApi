@@ -6,6 +6,7 @@ import com.yeagle.freeapi.network.base.BaseBean;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -20,6 +21,7 @@ public interface FreeApiService { //satinGodApi
     @GET("satinGodApi")
     BaseBean<List<SatinGodInfo>> satinGodApi(@Query("type") int type, @Query("page") int page);
 
+    //BaseBean<List<SatinGodInfo>>
     @GET("{path}")
-    BaseBean<List<SatinGodInfo>> request(@Path(value = "path", encoded = true)String path, @Query("type") int type, @Query("page") int page);
+    Observable<BaseBean> request(@Path(value = "path", encoded = true)String path, @Query("type") int type, @Query("page") int page);
 }
