@@ -20,6 +20,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import cn.yeagle.common.di.scope.ActivityScoped;
+import cn.yeagle.common.utils.LogUtils;
 
 /**
  * Created by yeagle on 2018/5/2.
@@ -43,25 +44,27 @@ public class BeautyPicFragment extends ApiRecyclerFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mPagePresenter.takeView(this);
+//        LogUtils.e(TAG, "onCreateView" + this);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
     protected void initAdapter() {
         mRcView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRcView.setAdapter(new BeautyPicAdapter(getContext(), new ArrayList<>()));
+        mRcView.setAdapter(mAdapter == null ? new BeautyPicAdapter(getContext(), new ArrayList<>()) : mAdapter);
     }
 
     @Override
-    protected void onData(Object object, boolean refresh) {
-        super.onData(object, refresh);
+    protected void onData(List data, boolean refresh) {
+        super.onData(data, refresh);
 
         if (mAdapter == null) {
-            mAdapter = new BeautyPicAdapter(getContext(), (List<BeautyInfo>) object);
+            mAdapter = new BeautyPicAdapter(getContext(), (List<BeautyInfo>) data);
+            mRcView.setAdapter(mAdapter);
         } else if (refresh) {
-            mAdapter.setData((List<BeautyInfo>) object);
+            mAdapter.setData((List<BeautyInfo>) data);
         } else {
-            mAdapter.addData((List<BeautyInfo>) object);
+            mAdapter.addData((List<BeautyInfo>) data);
         }
     }
 
@@ -73,11 +76,14 @@ public class BeautyPicFragment extends ApiRecyclerFragment {
     @Override
     public void showLoading() {
         mLoadingView.setVisibility(View.VISIBLE);
+//        LogUtils.e(TAG, "showLoading");
     }
 
     @Override
     public void hideLoading() {
-        mLoadingView.setVisibility(View.GONE);
+        if (mLoadingView != null)
+            mLoadingView.setVisibility(View.GONE);
+//        LogUtils.e(TAG, "hideLoading:" + mLoadingView + "::" + this);
     }
 
     @Override

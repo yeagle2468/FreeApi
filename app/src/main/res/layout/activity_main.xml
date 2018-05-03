@@ -7,16 +7,12 @@
     android:fitsSystemWindows="true"
     tools:context=".main.activity.MainActivity">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/layout_toolbar"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
     <FrameLayout android:id="@+id/content_frame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_bar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
         />
 
     <com.ashokvarma.bottomnavigation.BottomNavigationBar

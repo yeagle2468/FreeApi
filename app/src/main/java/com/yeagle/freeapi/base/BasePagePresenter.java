@@ -2,9 +2,11 @@ package com.yeagle.freeapi.base;
 
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
+import com.yeagle.freeapi.network.ApiException;
 import com.yeagle.freeapi.network.base.BaseBean;
 
 import java.util.HashMap;
+import java.util.List;
 
 import cn.yeagle.common.http.IRepositoryManager;
 import cn.yeagle.common.mvp.BasePresenter;
@@ -34,7 +36,6 @@ public abstract class BasePagePresenter extends BasePresenter<PageContract.View>
         loadData(path, refresh, null, token);
     }
 
-
     @Override
     public void loadData(final String path, final boolean refresh, Object extraValue, TypeToken token) {
         final int page;
@@ -52,7 +53,7 @@ public abstract class BasePagePresenter extends BasePresenter<PageContract.View>
             @Override
             public void onNext(Object o) {
                 if (mView != null)
-                    mView.onData(o, refresh, path);
+                    mView.onData((List)o, refresh, path);
             }
 
             @Override
@@ -70,7 +71,8 @@ public abstract class BasePagePresenter extends BasePresenter<PageContract.View>
     @Override
     protected String convertToString(Object object) {
         String str = ((BaseBean<JsonElement>)object).getData().toString();
-        LogUtils.e(TAG, "content;" + str);
+//        LogUtils.e(TAG, "content;" + str);
+
         return str;
     }
 

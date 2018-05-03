@@ -3,6 +3,9 @@ package com.yeagle.freeapi.home.fragment;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.TextView;
 
 import com.yeagle.freeapi.R;
 import com.yeagle.freeapi.adapter.SimpleFragmentPagerAdapter;
@@ -26,12 +29,20 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.tl_home)
     TabLayout mTabLayout;
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.title_name_tv)
+    TextView mTitleNameView;
+
+    @BindView(R.id.title_back_rl)
+    View mBackView;
+
     private SimpleFragmentPagerAdapter mPageAdapter;
     private Fragment[] mFragments = new Fragment[TAB_NUMS];
 
     @Inject
     public HomeFragment() {
-
     }
 
     @Override
@@ -63,7 +74,13 @@ public class HomeFragment extends BaseFragment {
         mFragments[1] = new BeautyPicFragment();
         mFragments[2] = new BeautyPicFragment();
 
-        mPageAdapter = new SimpleFragmentPagerAdapter(getChildFragmentManager(), mFragments);
+
+        String titles[] = getResources().getStringArray(R.array.home_titles);//{"美图"};
+
+        mPageAdapter = new SimpleFragmentPagerAdapter(getChildFragmentManager(), mFragments, titles);
         mViewPager.setAdapter(mPageAdapter);
+
+        mTitleNameView.setText(R.string.home);
+        mBackView.setVisibility(View.GONE);
     }
 }

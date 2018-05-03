@@ -3,14 +3,10 @@ package com.yeagle.freeapi.base;
 import android.os.Bundle;
 
 import com.google.gson.reflect.TypeToken;
-import com.yeagle.freeapi.home.model.BeautyInfo;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import cn.yeagle.common.utils.LogUtils;
-import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 
 /**
  * Created by yeagle on 2018/5/2.
@@ -42,7 +38,7 @@ public abstract class ApiRecyclerFragment extends BaseRecyclerFragment implement
             return;
         }
 
-        pagePresenter.loadData(bundle.getString(PATH), refresh, bundle.getInt(TYPE), new TypeToken<List<BeautyInfo>>(){}); // getTypeToken()
+        pagePresenter.loadData(bundle.getString(PATH), refresh, bundle.getInt(TYPE), getTypeToken()); // getTypeToken() new TypeToken<List<BeautyInfo>>(){})
 //        pagePresenter.loadData(bundle.getString(PATH), refresh, bundle.getInt(TYPE), new ErrorHandleSubscriber(pagePresenter.getRxErrorHandler()) {
 //            @Override
 //            public void onNext(Object o) {
@@ -57,8 +53,14 @@ public abstract class ApiRecyclerFragment extends BaseRecyclerFragment implement
     }
 
     @Override
-    public void onData(Object object, boolean refresh, String path) {
-        onData(object, refresh);
+    public void onData(List data, boolean refresh, String path) {
+        if (refresh && !mLoadedFirstData)
+            mLoadedFirstData = true; // 第一次加载完毕
+
+        if (data == null || data.size() < getPageNum()) {
+            hasLoadedAllData = true; // 当获取的数据小于请求的数据，就算它已经加载完毕
+        }
+        onData(data, refresh);
     }
 
     @Override
@@ -70,7 +72,7 @@ public abstract class ApiRecyclerFragment extends BaseRecyclerFragment implement
     protected abstract BasePagePresenter getBasePagePresenter();
     protected abstract TypeToken getTypeToken();
 
-    protected void onData(Object object, boolean refresh) {
+    protected void onData(List data, boolean refresh) {
 
     }
 }

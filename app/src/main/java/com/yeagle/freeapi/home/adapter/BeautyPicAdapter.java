@@ -12,6 +12,8 @@ import com.yeagle.freeapi.home.model.BeautyInfo;
 
 import java.util.List;
 
+import cn.yeagle.common.utils.LogUtils;
+
 /**
  * Created by yeagle on 2018/5/2.
  */
@@ -24,7 +26,8 @@ public class BeautyPicAdapter extends CommonAdapter<BeautyInfo> {
     protected void convert(ViewHolder holder, BeautyInfo info, int position) {
         ImageView imageView = holder.getView(R.id.iv_img);
 
-        Glide.with(imageView)
+//        LogUtils.e("BeautyPicAdapter", "convert:" + info.url);
+        Glide.with(mContext)
                 .load(info.url)
 //                .error(R.drawable.default_pic_2)
                 .into(imageView);

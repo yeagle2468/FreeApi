@@ -1,4 +1,4 @@
-package com.yeagle.freeapi.network;
+package cn.yeagle.common.http;
 
 
 import android.annotation.SuppressLint;
@@ -34,12 +34,12 @@ import okhttp3.OkHttpClient;
  */
 public class CustomOkHttpClient {
 
-    public static OkHttpClient getOkHttpClient(Context context) {
+    public static OkHttpClient getOkHttpClient(Context context, String assertName) {
         try {
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
             //线上环境校验应用证书
             if (!BuildConfig.DEBUG) {         //测试环境，不验证ssl方便测试抓包
-                builder.sslSocketFactory(getSSLContext(context).getSocketFactory());
+                builder.sslSocketFactory(getSSLContext(context, assertName).getSocketFactory());
             } else {
 //            忽略证书
                 SSLSocketFactory sslSocketFactory = createSSLSocketFactory();
@@ -48,12 +48,7 @@ public class CustomOkHttpClient {
                 }
             }
             //host验证,这里host不验证
-            builder.hostnameVerifier(new HostnameVerifier() {
-                @Override
-                public boolean verify(String hostname, SSLSession session) {
-                    return true;
-                }
-            });
+            builder.hostnameVerifier(((hostname, session) -> true));
             OkHttpClient build = builder.build();
             return build;
         } catch (Exception e) {
@@ -75,7 +70,7 @@ public class CustomOkHttpClient {
                 mBuilder.sslSocketFactory(sslSocketFactory);
             }
             //host验证,这里host不验证
-            mBuilder.hostnameVerifier((hostname, session) -> {return true;});
+            mBuilder.hostnameVerifier((hostname, session) -> true);
             OkHttpClient build = mBuilder.build();
             return build;
         } catch (Exception e) {
@@ -94,7 +89,7 @@ public class CustomOkHttpClient {
      * @param context Activity（fragment）的上下文
      * @return SSL的上下文对象
      */
-    private static SSLContext getSSLContext(Context context) {
+    private static SSLContext getSSLContext(Context context, String assertName) {
         if (null != s_sSLContext) {
             return s_sSLContext;
         }
@@ -108,7 +103,7 @@ public class CustomOkHttpClient {
         try {
             certificateFactory = CertificateFactory.getInstance("X.509", "BC");
 
-            inputStream = context.getAssets().open("cert.cer");//这里导入SSL证书文件
+            inputStream = context.getAssets().open(assertName);//这里导入SSL证书文件,"cert.cer"
 
             Certificate ca = certificateFactory.generateCertificate(inputStream);
 

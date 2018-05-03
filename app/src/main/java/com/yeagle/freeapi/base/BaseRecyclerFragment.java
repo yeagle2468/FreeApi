@@ -8,21 +8,24 @@ import com.paginate.Paginate;
 import com.yeagle.freeapi.R;
 import com.yeagle.freeapi.widget.recycleview.CustomLoadingListItemCreator;
 
-import javax.inject.Inject;
-
-import cn.yeagle.common.base.BaseFragment;
+import cn.yeagle.common.utils.LogUtils;
 
 /**
  * Created by yeagle on 2018/4/18.
  */
 public class BaseRecyclerFragment extends LazyFragment implements Paginate.Callbacks {
     private static final int GRID_SPAN = 3;
+    private static final int DEFAULT_PAGE_NUM = 20;
+
     protected RecyclerView mRcView;
     protected SwipeRefreshLayout mSwipeLayout;
     protected Paginate mPaginate;
     protected boolean mLoading;
 
     protected View mLoadingView;
+    protected boolean mLoadedFirstData;
+    protected boolean hasLoadedAllData;
+//    private boolean
 
     @Override
     public int getLayoutId() {
@@ -41,11 +44,12 @@ public class BaseRecyclerFragment extends LazyFragment implements Paginate.Callb
 
         initAdapter();
         mPaginate = Paginate.with(mRcView, this)
-                .setLoadingTriggerThreshold(2)
+                .setLoadingTriggerThreshold(0)
                 .addLoadingListItem(true)
                 .setLoadingListItemCreator(new CustomLoadingListItemCreator())
                 .setLoadingListItemSpanSizeLookup(() -> GRID_SPAN)
                 .build();
+//        mPaginate.setHasMoreDataToLoad(false);
     }
 
     protected void initAdapter() {
@@ -54,6 +58,7 @@ public class BaseRecyclerFragment extends LazyFragment implements Paginate.Callb
 
     @Override
     protected void lazyLoad() {
+        super.lazyLoad();
         onRefresh();
     }
 
@@ -61,18 +66,30 @@ public class BaseRecyclerFragment extends LazyFragment implements Paginate.Callb
         mLoading = true;
     }
 
+    protected int getPageNum() {
+        return DEFAULT_PAGE_NUM;
+    }
+
     @Override
     public void onLoadMore() {
+        LogUtils.e(TAG, "onLoadMore");
         mLoading = true;
+//        int visibleItemCount = mRcView.getChildCount();
+//        int totalItemCount = mRcView.getLayoutManager().getItemCount();
+//        int firstVisibleItemPosition = ((LinearLayoutManager) mRcView.getLayoutManager()).findFirstVisibleItemPosition();
+//
+//        LogUtils.e(TAG, "visibleItemCount:" + visibleItemCount + ",totalItemCount:" + totalItemCount + ",firstVisibleItemPosition:" + firstVisibleItemPosition);
     }
 
     @Override
     public synchronized boolean isLoading() {
+        LogUtils.e(TAG, "isLoading:" + mLoading);
         return mLoading;
     }
 
     @Override
     public boolean hasLoadedAllItems() {
-        return false;
+        LogUtils.e(TAG, "hasLoadedAllItems:" + (!mLoadedFirstData || hasLoadedAllData));
+        return ((!mLoadedFirstData) || hasLoadedAllData);
     }
 }

@@ -20,7 +20,6 @@ public abstract class MainModule {
     @ContributesAndroidInjector
     abstract HomeFragment homeFragment();
 
-    @ActivityScoped
     @Binds
     abstract BasePagePresenter mainPresenter(ApiPagePresenter presenter);
 

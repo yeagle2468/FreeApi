@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import cn.yeagle.common.base.BaseFragment;
+import cn.yeagle.common.utils.LogUtils;
 
 /**
  * Created by yeagle on 2018/5/2.
@@ -22,7 +23,7 @@ public abstract class LazyFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.initViews();
+//        this.initViews();
         this.isInit = true;
         this.isCanLoadData();
     }
@@ -61,6 +62,7 @@ public abstract class LazyFragment extends BaseFragment {
      * 懒加载中，开始加载数据（只在初次显示出来的时候被调用）
      */
     protected void lazyLoad() {
+        LogUtils.e(TAG, "lazyLoad" + this);
     }
 
     /**

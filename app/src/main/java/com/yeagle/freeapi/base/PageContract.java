@@ -2,6 +2,8 @@ package com.yeagle.freeapi.base;
 
 import com.google.gson.reflect.TypeToken;
 
+import java.util.List;
+
 import cn.yeagle.common.mvp.IPresenter;
 import cn.yeagle.common.mvp.IView;
 
@@ -10,7 +12,7 @@ import cn.yeagle.common.mvp.IView;
  */
 public interface PageContract {
     interface View extends IView {
-        public void onData(Object object, boolean refresh, String path);
+        public void onData(List data, boolean refresh, String path);
         public void onComplete(String path);
     }
 

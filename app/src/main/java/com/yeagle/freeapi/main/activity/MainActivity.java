@@ -12,8 +12,8 @@ import com.yeagle.freeapi.home.fragment.HomeFragment;
 import butterknife.BindView;
 
 public class MainActivity extends FreeApiActivity {
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+//    @BindView(R.id.toolbar)
+//    Toolbar toolbar;
 
     @BindView(R.id.bottom_navigation_bar)
     BottomNavigationBar navigationBar;

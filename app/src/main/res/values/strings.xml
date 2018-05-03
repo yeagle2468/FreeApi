@@ -7,4 +7,9 @@
     <string name="mine">我的</string>
 
     <string name="content_is_empty">内容为空</string>
+    <string-array name="home_titles">
+        <item>美图</item>
+        <item>美图</item>
+        <item>美图</item>
+    </string-array>
 </resources>
