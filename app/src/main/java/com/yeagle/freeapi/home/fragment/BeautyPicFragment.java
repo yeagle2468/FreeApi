@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.reflect.TypeToken;
-import com.yeagle.freeapi.api.Api;
+import com.yeagle.freeapi.network.api.Api;
 import com.yeagle.freeapi.base.ApiRecyclerFragment;
 import com.yeagle.freeapi.base.BasePagePresenter;
 import com.yeagle.freeapi.home.adapter.BeautyPicAdapter;
@@ -20,7 +20,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import cn.yeagle.common.di.scope.ActivityScoped;
-import cn.yeagle.common.utils.LogUtils;
 
 /**
  * Created by yeagle on 2018/5/2.

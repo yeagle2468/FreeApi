@@ -1,6 +1,6 @@
 package com.yeagle.freeapi.base;
 
-import com.yeagle.freeapi.api.FreeApiService;
+import com.yeagle.freeapi.network.api.FreeApiService;
 
 import javax.inject.Inject;
 

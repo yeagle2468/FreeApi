@@ -1,4 +1,4 @@
-package com.yeagle.freeapi.api;
+package com.yeagle.freeapi.network.api;
 
 import com.google.gson.JsonElement;
 import com.yeagle.freeapi.home.model.SatinGodInfo;

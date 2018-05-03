@@ -1,4 +1,4 @@
-package com.yeagle.freeapi.api;
+package com.yeagle.freeapi.network.api;
 
 /**
  * Created by yeagle on 2018/4/17.

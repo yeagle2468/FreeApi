@@ -3,7 +3,7 @@ package com.yeagle.freeapi.di;
 import android.content.Context;
 
 import com.google.gson.Gson;
-import com.yeagle.freeapi.api.Api;
+import com.yeagle.freeapi.network.api.Api;
 import com.yeagle.freeapi.network.ResponseError;
 import com.yeagle.freeapi.network.converter.MyGsonConverterFactory;
 import com.yeagle.freeapi.util.OkHttpUtils;
