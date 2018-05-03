@@ -19,6 +19,9 @@
 
         <activity android:name=".home.activity.HomeActivity"
             />
+
+        <activity android:name=".photo.PictureActivity"
+            />
     </application>
 
 </manifest>
