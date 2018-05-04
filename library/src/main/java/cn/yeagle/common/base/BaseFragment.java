@@ -51,11 +51,12 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
         if (mRootView == null) {
             View rootView = inflater.inflate(getLayoutId(), null);
             mRootView = rootView;
-            mUnBinder = ButterKnife.bind(this, mRootView);
-            initViews();
         } else if (mRootView.getParent() != null) {
             ((ViewGroup) mRootView.getParent()).removeView(mRootView);
         }
+
+        mUnBinder = ButterKnife.bind(this, mRootView);
+        initViews();
 
         return mRootView;
     }

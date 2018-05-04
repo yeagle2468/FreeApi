@@ -37,7 +37,7 @@ public class BeautyPicAdapter extends CommonAdapter<BeautyInfo> {
                 .into(imageView);
 
         holder.itemView.setOnClickListener((view ->
-            PictureActivity.launch(ActivityUtils.getActivityFromView(view), (ArrayList)mDatas, position)));
+            PictureActivity.launch(ActivityUtils.getActivityFromView(view), (ArrayList)mDatas, position, info.type)));
     }
 
     public void addData(List<BeautyInfo> data) {
