@@ -2,8 +2,10 @@ package com.yeagle.freeapi.photo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
@@ -34,7 +36,9 @@ public class PictureActivity extends FreeApiActivity {
     @BindView(R.id.title_more_view)
     View mMoreView;
 
-    private String mPicName;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+//    private String mPicName;
 
     @Override
     protected int getLayoutId() {
@@ -47,6 +51,7 @@ public class PictureActivity extends FreeApiActivity {
 
         List<IPhotoInfo> datas = getIntent().getParcelableArrayListExtra(INFO);
         initAdapter(datas);
+        toolbar.setBackgroundColor(Color.TRANSPARENT);
     }
 
     private void initAdapter(List<IPhotoInfo> datas) {
@@ -66,7 +71,7 @@ public class PictureActivity extends FreeApiActivity {
 
             @Override
             public void onPageSelected(int position) {
-                mTitleTv.setText(getString(R.string.picture_num, mPicName, position+1, adapter.getCount()));
+                mTitleTv.setText(getString(R.string.picture_num, position+1, adapter.getCount())); //mPicName,
             }
 
             @Override
@@ -80,10 +85,10 @@ public class PictureActivity extends FreeApiActivity {
         if (pos >= 0 && pos < count) {
             mViewPager.setCurrentItem(pos);
         }
-        String title = intent.getStringExtra(TITLE);
-        mPicName = title == null ?  getString(R.string.picture) : title;
+//        String title = intent.getStringExtra(TITLE);
+//        mPicName = title == null ?  getString(R.string.picture) : title;
 
-        mTitleTv.setText(getString(R.string.picture_num, mPicName, pos+1, count));
+        mTitleTv.setText(getString(R.string.picture_num, pos+1, count)); // mPicName,
     }
 
     @OnClick(R.id.title_more_view)

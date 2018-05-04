@@ -314,7 +314,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
         mResumeFragments.clear();
     }
 
-    protected void addFragment(Fragment fragment, String tag) {
+    public void addFragment(Fragment fragment, String tag) {
         if (!checkSaveInstance(fragment, tag, FragmentInfo.ACTION_ADD)) {
             addFragmentInternal(fragment, 0, tag);
         } // else 不做任何操作，下面已经做了
@@ -326,7 +326,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
      * @param id
      * @param tag
      */
-    protected void addFragment(Fragment fragment, int id, String tag) {
+    public void addFragment(Fragment fragment, int id, String tag) {
         if (!checkSaveInstance(fragment, id, tag, FragmentInfo.ACTION_ADD)) {
             addFragmentInternal(fragment, id, tag);
         } // else 不做任何操作，下面已经做了

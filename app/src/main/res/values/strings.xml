@@ -7,12 +7,17 @@
     <string name="mine">我的</string>
 
     <string name="content_is_empty">内容为空</string>
-    <string name="picture_num">"%1$s(第%2$d张/共%3$d张)"</string>
+    <string name="picture_num">"%1$d / %2$d"</string>
     <string name="picture">图片</string>
 
     <string-array name="home_titles">
         <item>美图</item>
         <item>美图</item>
         <item>美图</item>
+    </string-array>
+
+    <string-array name="picture_actions">
+        <item>保存</item>
+        <item>分享</item>
     </string-array>
 </resources>

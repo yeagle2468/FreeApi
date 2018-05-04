@@ -14,6 +14,8 @@ import com.yeagle.freeapi.R;
 import com.yeagle.freeapi.base.LazyFragment;
 
 import butterknife.BindView;
+import cn.yeagle.common.base.BaseActivity;
+import cn.yeagle.common.utils.ActivityUtils;
 import cn.yeagle.common.utils.LogUtils;
 
 /**
@@ -40,6 +42,7 @@ public class PictureFragment extends LazyFragment {
     protected void initViews() {
         super.initViews();
         mPhotoView.setImageResource(R.drawable.default_picture);
+//        mPhotoView.setOnLongClickListener((view -> ));
     }
 
     @Override
@@ -54,6 +57,13 @@ public class PictureFragment extends LazyFragment {
 
         RequestOptions options = new RequestOptions().dontAnimate().placeholder(R.drawable.default_picture).priority(Priority.HIGH);
         Glide.with(getContext()).load(getArguments().getString(URL)).apply(options).into(mPhotoView);
+
+        mPhotoView.setOnLongClickListener((view) -> {
+            SavePhotoFragment fragment = SavePhotoFragment.newInstance(getContext());
+            BaseActivity activity = (BaseActivity) ActivityUtils.getActivityFromView(view);
+            activity.addFragment(fragment, "SavePhotoFragment");
+            return true;
+        });
     }
 
     @Override

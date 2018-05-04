@@ -64,6 +64,7 @@ public class BaseRecyclerFragment extends LazyFragment implements Paginate.Callb
 
     protected void onRefresh() {
         mLoading = true;
+        LogUtils.e(TAG, "onRefresh");
     }
 
     protected int getPageNum() {
@@ -74,11 +75,6 @@ public class BaseRecyclerFragment extends LazyFragment implements Paginate.Callb
     public void onLoadMore() {
         LogUtils.e(TAG, "onLoadMore");
         mLoading = true;
-//        int visibleItemCount = mRcView.getChildCount();
-//        int totalItemCount = mRcView.getLayoutManager().getItemCount();
-//        int firstVisibleItemPosition = ((LinearLayoutManager) mRcView.getLayoutManager()).findFirstVisibleItemPosition();
-//
-//        LogUtils.e(TAG, "visibleItemCount:" + visibleItemCount + ",totalItemCount:" + totalItemCount + ",firstVisibleItemPosition:" + firstVisibleItemPosition);
     }
 
     @Override

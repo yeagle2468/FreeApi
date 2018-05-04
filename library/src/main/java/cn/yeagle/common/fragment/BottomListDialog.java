@@ -19,6 +19,8 @@ import cn.yeagle.common.utils.LogUtils;
  * Created by yeagle on 2018/3/7.
  */
 public class BottomListDialog extends BaseDialogFragment {
+    public static final String ARGS = "args";
+
     private OnItemClickListener mListener;
     private int mBgColor = Color.WHITE, mDivider = Color.LTGRAY;
 //    private int mItemTextColor = Color.GRAY, mCancelColor = Color.GRAY;
@@ -27,7 +29,7 @@ public class BottomListDialog extends BaseDialogFragment {
         BottomListDialog f = new BottomListDialog();
 
         Bundle bundle = new Bundle();
-        bundle.putStringArray("args", args);
+        bundle.putStringArray(ARGS, args);
         bundle.putParcelable("info", info);
         f.setArguments(bundle);
 

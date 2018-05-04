@@ -15,9 +15,6 @@ public abstract class ApiRecyclerFragment extends BaseRecyclerFragment implement
     protected static final String PATH = "path";
     protected static final String TYPE = "type";
 
-//    @Inject
-//    BasePagePresenter mPagePresenter;
-
     @Override
     protected void onRefresh() {
         super.onRefresh();
@@ -38,18 +35,7 @@ public abstract class ApiRecyclerFragment extends BaseRecyclerFragment implement
             return;
         }
 
-        pagePresenter.loadData(bundle.getString(PATH), refresh, bundle.getInt(TYPE), getTypeToken()); // getTypeToken() new TypeToken<List<BeautyInfo>>(){})
-//        pagePresenter.loadData(bundle.getString(PATH), refresh, bundle.getInt(TYPE), new ErrorHandleSubscriber(pagePresenter.getRxErrorHandler()) {
-//            @Override
-//            public void onNext(Object o) {
-//                onData(o, refresh);
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//                mLoading = false;
-//            }
-//        });
+        pagePresenter.loadData(bundle.getString(PATH), refresh, bundle.getInt(TYPE), getTypeToken());
     }
 
     @Override
@@ -67,6 +53,7 @@ public abstract class ApiRecyclerFragment extends BaseRecyclerFragment implement
     public void onComplete(String path) {
         mLoading = false;
         hideLoading();
+        mSwipeLayout.setRefreshing(false);
     }
 
     protected abstract BasePagePresenter getBasePagePresenter();
