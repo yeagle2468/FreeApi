@@ -3,10 +3,12 @@ package com.yeagle.freeapi.home.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.reflect.TypeToken;
 import com.yeagle.freeapi.network.api.Api;
 import com.yeagle.freeapi.base.ApiRecyclerFragment;
@@ -51,6 +53,26 @@ public class BeautyPicFragment extends ApiRecyclerFragment {
     protected void initAdapter() {
         mRcView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRcView.setAdapter(mAdapter == null ? new BeautyPicAdapter(getContext(), new ArrayList<>()) : mAdapter);
+
+        mRcView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) { // 滑动的时候暂停加载图片
+                    Glide.with(getContext()).resumeRequests(); // 现在不是针对所有的有效了，只对这个context有效
+//                    LogUtils.e(TAG, "resumeRequests");
+                } else {  // 滑动的时候暂停加载图片
+                    Glide.with(getContext()).pauseAllRequests(); // 现在不是针对所有的有效了，只对这个context有效
+//                    LogUtils.e(TAG, "pauseAllRequests");
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
     }
 
     @Override
@@ -64,6 +86,7 @@ public class BeautyPicFragment extends ApiRecyclerFragment {
             mAdapter.setData((List<BeautyInfo>) data);
         } else {
             mAdapter.addData((List<BeautyInfo>) data);
+//            LogUtils.e(TAG, "adapter data size:" + mAdapter.getItemCount() + this);
         }
     }
 
@@ -99,5 +122,6 @@ public class BeautyPicFragment extends ApiRecyclerFragment {
     public void onDestroyView() {
         super.onDestroyView();
         mPagePresenter.dropView();
+        mRcView.clearOnScrollListeners();
     }
 }

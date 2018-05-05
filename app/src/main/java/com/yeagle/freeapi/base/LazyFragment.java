@@ -82,6 +82,6 @@ public abstract class LazyFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         isInit = false;
-        isLoad = false;
+//        isLoad = false; //在这里不需要赋值为false，因为这个存在重新进来加载的问题，以前的数据就没有了，Viewpager以前的数据还在，但是这样导致需要重新加载
     }
 }
