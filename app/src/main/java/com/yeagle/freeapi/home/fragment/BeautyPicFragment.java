@@ -45,34 +45,13 @@ public class BeautyPicFragment extends ApiRecyclerFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mPagePresenter.takeView(this);
-//        LogUtils.e(TAG, "onCreateView" + this);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
-    protected void initAdapter() {
-        mRcView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRcView.setAdapter(mAdapter == null ? new BeautyPicAdapter(getContext(), new ArrayList<>()) : mAdapter);
-
-        mRcView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) { // 滑动的时候暂停加载图片
-                    Glide.with(getContext()).resumeRequests(); // 现在不是针对所有的有效了，只对这个context有效
-//                    LogUtils.e(TAG, "resumeRequests");
-                } else {  // 滑动的时候暂停加载图片
-                    Glide.with(getContext()).pauseAllRequests(); // 现在不是针对所有的有效了，只对这个context有效
-//                    LogUtils.e(TAG, "pauseAllRequests");
-                }
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-            }
-        });
+    protected RecyclerView.Adapter getAdapter() {
+        mAdapter = new BeautyPicAdapter(getContext(), new ArrayList<>());
+        return mAdapter;
     }
 
     @Override
@@ -93,24 +72,6 @@ public class BeautyPicFragment extends ApiRecyclerFragment {
     @Override
     protected BasePagePresenter getBasePagePresenter() {
         return mPagePresenter;
-    }
-
-    @Override
-    public void showLoading() {
-        mLoadingView.setVisibility(View.VISIBLE);
-//        LogUtils.e(TAG, "showLoading");
-    }
-
-    @Override
-    public void hideLoading() {
-        if (mLoadingView != null)
-            mLoadingView.setVisibility(View.GONE);
-//        LogUtils.e(TAG, "hideLoading:" + mLoadingView + "::" + this);
-    }
-
-    @Override
-    public boolean useInject() {
-        return true;
     }
 
     @Override

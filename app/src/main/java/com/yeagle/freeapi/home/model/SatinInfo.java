@@ -1,5 +1,7 @@
 package com.yeagle.freeapi.home.model;
 
+import android.support.annotation.IntDef;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -8,6 +10,15 @@ import com.google.gson.annotations.SerializedName;
  * 我也用这个好了，实在翻译不了这个段子
  */
 public class SatinInfo {
+    public static final int TYPE_VIDEO = 41;
+    public static final int TYPE_IMAGE = 10;
+    public static final int TYPE_TEXT  = 29;
+    public static final int TYPE_VOICE = 31;
+
+    @IntDef({TYPE_VIDEO, TYPE_IMAGE, TYPE_TEXT, TYPE_VOICE})
+    public @interface Type {
+    }
+
     /**
      * "type": "41",
      "text": "专治各种不服！哈哈哈",
@@ -54,6 +65,7 @@ public class SatinInfo {
      "top_cmt": null,
      "themes": null
      */
+    @Type
     public int type;
     public String text;
     public int user_id;

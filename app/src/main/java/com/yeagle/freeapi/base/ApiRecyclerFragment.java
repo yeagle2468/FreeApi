@@ -1,6 +1,7 @@
 package com.yeagle.freeapi.base;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.gson.reflect.TypeToken;
 
@@ -54,6 +55,19 @@ public abstract class ApiRecyclerFragment extends BaseRecyclerFragment implement
         mLoading = false;
         hideLoading();
         mSwipeLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void showLoading() {
+        mLoadingView.setVisibility(View.VISIBLE);
+//        LogUtils.e(TAG, "showLoading");
+    }
+
+    @Override
+    public void hideLoading() {
+        if (mLoadingView != null)
+            mLoadingView.setVisibility(View.GONE);
+//        LogUtils.e(TAG, "hideLoading:" + mLoadingView + "::" + this);
     }
 
     protected abstract BasePagePresenter getBasePagePresenter();
