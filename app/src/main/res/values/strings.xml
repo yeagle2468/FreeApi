@@ -12,8 +12,7 @@
 
     <string-array name="home_titles">
         <item>美图</item>
-        <item>美图</item>
-        <item>美图</item>
+        <item>个性签名</item>
     </string-array>
 
     <string-array name="picture_actions">

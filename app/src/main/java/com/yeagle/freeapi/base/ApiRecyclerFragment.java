@@ -1,7 +1,10 @@
 package com.yeagle.freeapi.base;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.google.gson.reflect.TypeToken;
 
@@ -50,6 +53,13 @@ public abstract class ApiRecyclerFragment extends BaseRecyclerFragment implement
         onData(data, refresh);
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        getBasePagePresenter().takeView(this);
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
     @Override
     public void onComplete(String path) {
         mLoading = false;
@@ -75,5 +85,11 @@ public abstract class ApiRecyclerFragment extends BaseRecyclerFragment implement
 
     protected void onData(List data, boolean refresh) {
 
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        getBasePagePresenter().dropView();
     }
 }

@@ -53,13 +53,13 @@ public abstract class BaseRecyclerFragment extends LazyFragment implements Pagin
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
+                if (scrollShowPicture()) //加载图片就不需要下面的操作
+                    return;
 
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) { // 滑动的时候暂停加载图片
                     Glide.with(getContext()).resumeRequests(); // 现在不是针对所有的有效了，只对这个context有效
-//                    LogUtils.e(TAG, "resumeRequests");
                 } else {  // 滑动的时候暂停加载图片
                     Glide.with(getContext()).pauseAllRequests(); // 现在不是针对所有的有效了，只对这个context有效
-//                    LogUtils.e(TAG, "pauseAllRequests");
                 }
             }
 
@@ -79,10 +79,18 @@ public abstract class BaseRecyclerFragment extends LazyFragment implements Pagin
 //        mPaginate.setHasMoreDataToLoad(false);
     }
 
+    /**
+     * 滑动的时候加载图片默认是不加载
+     * @return
+     */
+    protected boolean scrollShowPicture() {
+        return false;
+    }
+
     protected void initAdapter() {
         mRcView.setLayoutManager(getLayoutManager());
         RecyclerView.Adapter adapter ;
-        if (mAdapter == null)
+        if (mAdapter != null)
             adapter = mAdapter;
         else {
             adapter = getAdapter();
@@ -128,5 +136,11 @@ public abstract class BaseRecyclerFragment extends LazyFragment implements Pagin
     public boolean hasLoadedAllItems() {
         LogUtils.e(TAG, "hasLoadedAllItems:" + (!mLoadedFirstData || hasLoadedAllData));
         return ((!mLoadedFirstData) || hasLoadedAllData);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mRcView.clearOnScrollListeners();
     }
 }

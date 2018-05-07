@@ -22,7 +22,7 @@ import cn.yeagle.common.di.scope.ActivityScoped;
 @ActivityScoped
 public class HomeFragment extends BaseFragment {
 
-    private static final int TAB_NUMS = 3;
+    private static final int TAB_NUMS = 2;
 
     @BindView(R.id.vp_home)
     ViewPager mViewPager;
@@ -71,8 +71,8 @@ public class HomeFragment extends BaseFragment {
         mTabLayout.setupWithViewPager(mViewPager);
 
         mFragments[0] = new BeautyPicFragment();
-        mFragments[1] = new BeautyPicFragment();
-        mFragments[2] = new BeautyPicFragment();
+        mFragments[1] = new PersonSignFragment();
+//        mFragments[2] = new BeautyPicFragment();
 
 
         String titles[] = getResources().getStringArray(R.array.home_titles);//{"美图"};

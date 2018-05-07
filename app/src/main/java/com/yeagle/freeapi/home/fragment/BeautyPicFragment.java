@@ -1,14 +1,8 @@
 package com.yeagle.freeapi.home.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
 import com.google.gson.reflect.TypeToken;
 import com.yeagle.freeapi.network.api.Api;
 import com.yeagle.freeapi.base.ApiRecyclerFragment;
@@ -41,13 +35,6 @@ public class BeautyPicFragment extends ApiRecyclerFragment {
         setArguments(bundle);
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        mPagePresenter.takeView(this);
-        return super.onCreateView(inflater, container, savedInstanceState);
-    }
-
     @Override
     protected RecyclerView.Adapter getAdapter() {
         mAdapter = new BeautyPicAdapter(getContext(), new ArrayList<>());
@@ -70,6 +57,11 @@ public class BeautyPicFragment extends ApiRecyclerFragment {
     }
 
     @Override
+    protected boolean scrollShowPicture() {
+        return true;
+    }
+
+    @Override
     protected BasePagePresenter getBasePagePresenter() {
         return mPagePresenter;
     }
@@ -83,6 +75,5 @@ public class BeautyPicFragment extends ApiRecyclerFragment {
     public void onDestroyView() {
         super.onDestroyView();
         mPagePresenter.dropView();
-        mRcView.clearOnScrollListeners();
     }
 }

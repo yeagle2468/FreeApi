@@ -1,7 +1,6 @@
 package com.yeagle.freeapi.photo;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;

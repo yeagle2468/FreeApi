@@ -4,6 +4,8 @@ import com.yeagle.freeapi.base.ApiPagePresenter;
 import com.yeagle.freeapi.base.BasePagePresenter;
 import com.yeagle.freeapi.home.fragment.BeautyPicFragment;
 import com.yeagle.freeapi.home.fragment.HomeFragment;
+import com.yeagle.freeapi.home.fragment.PersonSignFragment;
+import com.yeagle.freeapi.novel.NovelListFragment;
 
 import cn.yeagle.common.di.scope.ActivityScoped;
 import cn.yeagle.common.di.scope.FragmentScoped;
@@ -26,4 +28,12 @@ public abstract class MainModule {
     @FragmentScoped
     @ContributesAndroidInjector
     abstract BeautyPicFragment beautyPicFragment();
+
+    @FragmentScoped
+    @ContributesAndroidInjector
+    abstract PersonSignFragment personSignFragment();
+
+    @FragmentScoped
+    @ContributesAndroidInjector
+    abstract NovelListFragment novelListFragment();
 }
