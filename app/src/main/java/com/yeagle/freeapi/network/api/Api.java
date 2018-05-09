@@ -9,4 +9,5 @@ public interface Api {
     String BEAUTY_PATH = "meituApi";
     String SIGN_PATH = "femaleNameApi";
     String NOVEL_PATH = "novelApi";
+    String SATIN_PATH = "satinApi";
 }
