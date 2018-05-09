@@ -8,10 +8,7 @@ import android.view.View;
 import com.bumptech.glide.Glide;
 import com.paginate.Paginate;
 import com.yeagle.freeapi.R;
-import com.yeagle.freeapi.home.adapter.BeautyPicAdapter;
 import com.yeagle.freeapi.widget.recycleview.CustomLoadingListItemCreator;
-
-import java.util.ArrayList;
 
 import cn.yeagle.common.utils.LogUtils;
 
