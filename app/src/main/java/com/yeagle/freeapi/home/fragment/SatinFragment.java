@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 
 import com.google.gson.reflect.TypeToken;
 import com.yeagle.freeapi.base.ApiRecyclerFragment;
-import com.yeagle.freeapi.base.BasePagePresenter;
 import com.yeagle.freeapi.home.adapter.PictureItemDelegate;
 import com.yeagle.freeapi.home.adapter.TextItemDelegate;
 import com.yeagle.freeapi.home.adapter.VideoItemDelegate;
@@ -18,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import cn.yeagle.common.mvp.BasePagePresenter;
 
 /**
  * Created by yeagle on 2018/4/18.

@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import com.google.gson.reflect.TypeToken;
 import com.yeagle.freeapi.network.api.Api;
 import com.yeagle.freeapi.base.ApiRecyclerFragment;
-import com.yeagle.freeapi.base.BasePagePresenter;
 import com.yeagle.freeapi.home.adapter.BeautyPicAdapter;
 import com.yeagle.freeapi.home.model.BeautyInfo;
 
@@ -16,6 +15,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import cn.yeagle.common.di.scope.ActivityScoped;
+import cn.yeagle.common.mvp.BasePagePresenter;
 
 /**
  * Created by yeagle on 2018/5/2.
@@ -23,8 +23,6 @@ import cn.yeagle.common.di.scope.ActivityScoped;
  */
 @ActivityScoped
 public class BeautyPicFragment extends ApiRecyclerFragment {
-    private BeautyPicAdapter mAdapter;
-
     @Inject
     BasePagePresenter mPagePresenter;
 
@@ -37,23 +35,8 @@ public class BeautyPicFragment extends ApiRecyclerFragment {
 
     @Override
     protected RecyclerView.Adapter getAdapter() {
-        mAdapter = new BeautyPicAdapter(getContext(), new ArrayList<>());
-        return mAdapter;
-    }
-
-    @Override
-    protected void onData(List data, boolean refresh) {
-        super.onData(data, refresh);
-
-        if (mAdapter == null) {
-            mAdapter = new BeautyPicAdapter(getContext(), (List<BeautyInfo>) data);
-            mRcView.setAdapter(mAdapter);
-        } else if (refresh) {
-            mAdapter.setData((List<BeautyInfo>) data);
-        } else {
-            mAdapter.addData((List<BeautyInfo>) data);
-//            LogUtils.e(TAG, "adapter data size:" + mAdapter.getItemCount() + this);
-        }
+         return new BeautyPicAdapter(getContext(), new ArrayList<>()); //mAdapter =
+//        return mAdapter;
     }
 
     @Override

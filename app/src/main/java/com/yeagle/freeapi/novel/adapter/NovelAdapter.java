@@ -4,19 +4,25 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.yeagle.freeapi.R;
-import com.yeagle.freeapi.base.BaseRcAdapter;
+import cn.yeagle.common.adapter.BaseRcAdapter;
 import com.yeagle.freeapi.novel.model.NovelInfo;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * Created by yeagle on 2018/5/7.
  */
 public class NovelAdapter extends BaseRcAdapter<NovelInfo> {
+    RequestOptions options;
+
     public NovelAdapter(Context context, List<NovelInfo> datas) {
         super(context, R.layout.rc_item_novel, datas);
+        options = createNewOption(R.drawable.default_picture);
     }
 
     @Override

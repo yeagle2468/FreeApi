@@ -1,11 +1,8 @@
-package com.yeagle.freeapi.base;
+package cn.yeagle.common.mvp;
 
 import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
-
-import cn.yeagle.common.mvp.IPresenter;
-import cn.yeagle.common.mvp.IView;
 
 /**
  * Created by yeagle on 2018/5/2.

@@ -1,4 +1,4 @@
-package com.yeagle.freeapi.base;
+package cn.yeagle.common.fragment;
 
 import android.os.Bundle;
 import android.view.View;

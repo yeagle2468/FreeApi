@@ -11,10 +11,10 @@ import com.bumptech.glide.Priority;
 import com.bumptech.glide.request.RequestOptions;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.yeagle.freeapi.R;
-import com.yeagle.freeapi.base.LazyFragment;
 
 import butterknife.BindView;
 import cn.yeagle.common.base.BaseActivity;
+import cn.yeagle.common.fragment.LazyFragment;
 import cn.yeagle.common.utils.ActivityUtils;
 import cn.yeagle.common.utils.LogUtils;
 

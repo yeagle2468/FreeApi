@@ -12,8 +12,8 @@
         android:layout_gravity="center"
         android:drawablePadding="5dp"
         android:drawableTop="@drawable/empty"
-        android:text="@string/content_is_empty"
-        android:textColor="@color/main_black"
+        android:text="内容为空"
+        android:textColor="#333"
         android:textSize="14sp"
         android:gravity="center"
         />

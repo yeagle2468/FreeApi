@@ -1,4 +1,4 @@
-package com.yeagle.freeapi.base;
+package cn.yeagle.common.mvp;
 
 import cn.yeagle.common.mvp.IPresenter;
 import cn.yeagle.common.mvp.IView;

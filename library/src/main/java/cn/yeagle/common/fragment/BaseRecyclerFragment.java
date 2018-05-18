@@ -1,4 +1,4 @@
-package com.yeagle.freeapi.base;
+package cn.yeagle.common.fragment;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,9 +7,9 @@ import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.paginate.Paginate;
-import com.yeagle.freeapi.R;
-import com.yeagle.freeapi.widget.recycleview.CustomLoadingListItemCreator;
+import com.paginate.recycler.LoadingListItemCreator;
 
+import cn.yeagle.common.R;
 import cn.yeagle.common.utils.LogUtils;
 
 /**
@@ -28,7 +28,7 @@ public abstract class BaseRecyclerFragment extends LazyFragment implements Pagin
     protected boolean mLoadedFirstData;
     protected boolean hasLoadedAllData;
 
-    private RecyclerView.Adapter mAdapter;
+    protected RecyclerView.Adapter mAdapter;
 //    private boolean
 
     @Override
@@ -70,10 +70,14 @@ public abstract class BaseRecyclerFragment extends LazyFragment implements Pagin
         mPaginate = Paginate.with(mRcView, this)
                 .setLoadingTriggerThreshold(0)
                 .addLoadingListItem(true)
-                .setLoadingListItemCreator(new CustomLoadingListItemCreator())
+                .setLoadingListItemCreator(getLoadingListItemCreator())
                 .setLoadingListItemSpanSizeLookup(() -> GRID_SPAN)
                 .build();
 //        mPaginate.setHasMoreDataToLoad(false);
+    }
+
+    protected LoadingListItemCreator getLoadingListItemCreator() {
+        return null;
     }
 
     /**

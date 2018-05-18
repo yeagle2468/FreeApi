@@ -1,7 +1,7 @@
 package com.yeagle.freeapi.network.base;
 
 /**
- * Created by xc_office on 2017/11/22.
+ *
  */
 public class BaseBean<T>  { //Serializable比较方便 implements Parcelable，Parcelable更加有利于有优势
 
@@ -37,5 +37,10 @@ public class BaseBean<T>  { //Serializable比较方便 implements Parcelable，P
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return data.toString();
     }
 }

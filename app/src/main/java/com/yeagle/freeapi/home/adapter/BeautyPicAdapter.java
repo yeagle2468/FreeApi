@@ -4,8 +4,11 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.yeagle.freeapi.R;
-import com.yeagle.freeapi.base.BaseRcAdapter;
+
+import cn.yeagle.common.adapter.BaseRcAdapter;
+
 import com.yeagle.freeapi.photo.PictureActivity;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
@@ -20,8 +23,11 @@ import cn.yeagle.common.utils.ActivityUtils;
  * Created by yeagle on 2018/5/2.
  */
 public class BeautyPicAdapter extends BaseRcAdapter<BeautyInfo> {
+    private RequestOptions options;
+
     public BeautyPicAdapter(Context context,  List<BeautyInfo> datas) { //int layoutId,
         super(context, R.layout.rc_item_beauty, datas);
+        options = createNewOption(R.drawable.default_picture);
     }
 
     @Override

@@ -3,7 +3,7 @@ package com.yeagle.freeapi.home.adapter;
 import android.content.Context;
 
 import com.yeagle.freeapi.R;
-import com.yeagle.freeapi.base.BaseRcAdapter;
+import cn.yeagle.common.adapter.BaseRcAdapter;
 import com.yeagle.freeapi.home.model.Sentence;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 

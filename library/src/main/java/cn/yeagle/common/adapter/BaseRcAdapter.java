@@ -1,10 +1,9 @@
-package com.yeagle.freeapi.base;
+package cn.yeagle.common.adapter;
 
 import android.content.Context;
 
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.request.RequestOptions;
-import com.yeagle.freeapi.R;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 
 import java.util.List;
@@ -13,7 +12,7 @@ import java.util.List;
  * Created by yeagle on 2018/5/7.
  */
 public abstract class BaseRcAdapter<T> extends CommonAdapter<T> {
-    protected RequestOptions options = new RequestOptions().dontAnimate().placeholder(R.drawable.default_picture).priority(Priority.HIGH);
+//    protected RequestOptions options = new RequestOptions().dontAnimate().placeholder(R.drawable.default_picture).priority(Priority.HIGH);
 
     public BaseRcAdapter(Context context, int layoutId, List<T> datas) {
         super(context, layoutId, datas);
@@ -27,6 +26,10 @@ public abstract class BaseRcAdapter<T> extends CommonAdapter<T> {
         }
 
         notifyDataSetChanged();
+    }
+
+    protected RequestOptions createNewOption (int defaultResId) {
+        return new RequestOptions().dontAnimate().placeholder(defaultResId).priority(Priority.HIGH);
     }
 
     public void setData(List<T> data) {

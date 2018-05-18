@@ -7,9 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.reflect.TypeToken;
+import com.yeagle.freeapi.home.model.BeautyInfo;
 
 import java.util.List;
 
+import cn.yeagle.common.adapter.BaseRcAdapter;
+import cn.yeagle.common.fragment.BaseRecyclerFragment;
+import cn.yeagle.common.mvp.BasePagePresenter;
+import cn.yeagle.common.mvp.PageContract;
 import cn.yeagle.common.utils.LogUtils;
 
 /**
@@ -85,7 +90,15 @@ public abstract class ApiRecyclerFragment extends BaseRecyclerFragment implement
     protected abstract TypeToken getTypeToken();
 
     protected void onData(List data, boolean refresh) {
-
+        if (!(mAdapter instanceof BaseRcAdapter))
+            return;
+        BaseRcAdapter adapter = (BaseRcAdapter)mAdapter;
+        if (refresh) {
+            adapter.setData((List<BeautyInfo>) data);
+        } else {
+            adapter.addData((List<BeautyInfo>) data);
+//            LogUtils.e(TAG, "adapter data size:" + mAdapter.getItemCount() + this);
+        }
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.yeagle.freeapi.novel;
 
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -9,7 +8,6 @@ import android.widget.TextView;
 import com.google.gson.reflect.TypeToken;
 import com.yeagle.freeapi.R;
 import com.yeagle.freeapi.base.ApiRecyclerFragment;
-import com.yeagle.freeapi.base.BasePagePresenter;
 import com.yeagle.freeapi.network.api.Api;
 import com.yeagle.freeapi.novel.adapter.NovelAdapter;
 import com.yeagle.freeapi.novel.model.NovelInfo;
@@ -20,6 +18,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import cn.yeagle.common.mvp.BasePagePresenter;
 
 /**
  * Created by yeagle on 2018/5/7.

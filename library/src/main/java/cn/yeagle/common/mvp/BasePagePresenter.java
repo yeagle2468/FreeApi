@@ -1,17 +1,11 @@
-package com.yeagle.freeapi.base;
+package cn.yeagle.common.mvp;
 
-import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
-import com.yeagle.freeapi.network.ApiException;
-import com.yeagle.freeapi.network.base.BaseBean;
 
 import java.util.HashMap;
 import java.util.List;
 
 import cn.yeagle.common.http.IRepositoryManager;
-import cn.yeagle.common.mvp.BasePresenter;
-import cn.yeagle.common.mvp.IView;
-import cn.yeagle.common.utils.LogUtils;
 import io.reactivex.Observable;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
@@ -70,7 +64,7 @@ public abstract class BasePagePresenter extends BasePresenter<PageContract.View>
 
     @Override
     protected String convertToString(Object object) {
-        String str = ((BaseBean<JsonElement>)object).getData().toString();
+        String str = object.toString();//((BaseBean<JsonElement>)object).getData().toString();
 //        LogUtils.e(TAG, "content;" + str);
 
         return str;

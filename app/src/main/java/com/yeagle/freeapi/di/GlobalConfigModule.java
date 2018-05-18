@@ -2,7 +2,10 @@ package com.yeagle.freeapi.di;
 
 import android.content.Context;
 
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
+import com.yeagle.freeapi.R;
 import com.yeagle.freeapi.network.api.Api;
 import com.yeagle.freeapi.network.ResponseError;
 import com.yeagle.freeapi.network.converter.MyGsonConverterFactory;
@@ -75,6 +78,12 @@ public abstract class GlobalConfigModule {
     @Provides
     static Gson provideGson() {
         return new Gson();
+    }
+
+    @Singleton
+    @Provides
+    static RequestOptions provideOptions() {
+        return new RequestOptions().dontAnimate().placeholder(R.drawable.default_picture).priority(Priority.HIGH);
     }
 
     @Singleton

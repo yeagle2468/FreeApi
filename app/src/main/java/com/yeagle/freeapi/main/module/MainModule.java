@@ -1,7 +1,7 @@
 package com.yeagle.freeapi.main.module;
 
 import com.yeagle.freeapi.base.ApiPagePresenter;
-import com.yeagle.freeapi.base.BasePagePresenter;
+
 import com.yeagle.freeapi.home.fragment.BeautyPicFragment;
 import com.yeagle.freeapi.home.fragment.HomeFragment;
 import com.yeagle.freeapi.home.fragment.PersonSignFragment;
@@ -9,6 +9,7 @@ import com.yeagle.freeapi.home.fragment.SatinFragment;
 import com.yeagle.freeapi.novel.NovelListFragment;
 
 import cn.yeagle.common.di.scope.FragmentScoped;
+import cn.yeagle.common.mvp.BasePagePresenter;
 import dagger.Binds;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
