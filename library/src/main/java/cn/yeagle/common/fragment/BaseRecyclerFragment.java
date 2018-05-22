@@ -109,7 +109,8 @@ public abstract class BaseRecyclerFragment extends LazyFragment implements Pagin
     @Override
     protected void lazyLoad() {
         super.lazyLoad();
-        onRefresh();
+        if (mAdapter == null)
+            onRefresh();
     }
 
     protected void onRefresh() {

@@ -42,6 +42,10 @@ public class PictureFragment extends LazyFragment {
     protected void initViews() {
         super.initViews();
         mPhotoView.setImageResource(R.drawable.default_picture);
+        if (isLoad) {
+            RequestOptions options = new RequestOptions().dontAnimate().placeholder(R.drawable.default_picture).priority(Priority.HIGH);
+            Glide.with(getContext()).load(getArguments().getString(URL)).apply(options).into(mPhotoView);
+        }
 //        mPhotoView.setOnLongClickListener((view -> ));
     }
 

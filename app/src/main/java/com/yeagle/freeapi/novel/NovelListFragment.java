@@ -28,7 +28,6 @@ public class NovelListFragment extends ApiRecyclerFragment {
 
     @Inject
     BasePagePresenter mPagePresenter;
-    private NovelAdapter mAdapter;
 
     @BindView(R.id.title_name_tv)
     TextView mTitleNameView;
@@ -67,21 +66,6 @@ public class NovelListFragment extends ApiRecyclerFragment {
     @Override
     protected TypeToken getTypeToken() {
         return new TypeToken<List<NovelInfo>>(){};
-    }
-
-    @Override
-    protected void onData(List data, boolean refresh) {
-        super.onData(data, refresh);
-
-        if (mAdapter == null) {
-            mAdapter = new NovelAdapter(getContext(), (List<NovelInfo>) data);
-            mRcView.setAdapter(mAdapter);
-        } else if (refresh) {
-            mAdapter.setData((List<NovelInfo>) data);
-        } else {
-            mAdapter.addData((List<NovelInfo>) data);
-//            LogUtils.e(TAG, "adapter data size:" + mAdapter.getItemCount() + this);
-        }
     }
 
     @Override
