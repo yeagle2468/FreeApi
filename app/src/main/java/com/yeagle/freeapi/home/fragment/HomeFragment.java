@@ -70,16 +70,22 @@ public class HomeFragment extends BaseFragment {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         mTabLayout.setupWithViewPager(mViewPager);
 
-        mFragments[0] = new BeautyPicFragment();
-        mFragments[1] = new PersonSignFragment();
-        mFragments[2] = new SatinFragment();
+        if (mPageAdapter == null) {
+            mFragments[0] = new BeautyPicFragment();
+            mFragments[1] = new PersonSignFragment();
+            mFragments[2] = new SatinFragment();
+        }
 
         String titles[] = getResources().getStringArray(R.array.home_titles);//{"美图"};
-
         mPageAdapter = new SimpleFragmentPagerAdapter(getChildFragmentManager(), mFragments, titles);
         mViewPager.setAdapter(mPageAdapter);
 
         mTitleNameView.setText(R.string.home);
         mBackView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 }

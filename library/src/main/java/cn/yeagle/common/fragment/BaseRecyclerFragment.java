@@ -137,7 +137,7 @@ public abstract class BaseRecyclerFragment extends LazyFragment implements Pagin
     @Override
     public boolean hasLoadedAllItems() {
         LogUtils.e(TAG, "hasLoadedAllItems:" + (!mLoadedFirstData || hasLoadedAllData));
-        return ((!mLoadedFirstData) || hasLoadedAllData);
+        return ( hasLoadedAllData); // (!mLoadedFirstData) ||
     }
 
     @Override
