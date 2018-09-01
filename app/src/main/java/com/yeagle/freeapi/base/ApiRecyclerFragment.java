@@ -54,7 +54,11 @@ public abstract class ApiRecyclerFragment extends BaseRecyclerFragment implement
 
         if (data == null || data.size() < getPageNum()) {
             hasLoadedAllData = true; // 当获取的数据小于请求的数据，就算它已经加载完毕
+            mPaginate.setHasMoreDataToLoad(false);
             LogUtils.e(TAG, "hasLoadedAllData is true");
+        } else {
+            hasLoadedAllData = false; // 当获取的数据小于请求的数据，就算它已经加载完毕
+            mPaginate.setHasMoreDataToLoad(true);
         }
         onData(data, refresh);
     }
